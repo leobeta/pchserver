@@ -1,8 +1,8 @@
-import { CreateUserDto, UpdateUserDto } from './dto';
+import { CreateUserDto, PaginationUserDto, UpdateUserDto } from './dto';
 
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './users.entity';
+import { User } from './entities';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -11,12 +11,12 @@ export class UsersService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) { }
 
-  async getAllUsers(): Promise<User[]> {
-    return await this.userRepository.find();
+  async getAllUsers({ limit, offset }: PaginationUserDto): Promise<User[]> {
+    return this.userRepository.find({ skip: offset, take: limit });
   }
 
   async getUser(id: number): Promise<User> {
-    const user = await this.userRepository.findOne(id);
+    const user: User = await this.userRepository.findOne(id);
     if (!user) {
       throw new NotFoundException(`User with ID "${id}" not found`);
     }
@@ -25,12 +25,12 @@ export class UsersService {
 
   async createUser(user: CreateUserDto): Promise<User> {
     console.log(user);
-    const newUser = this.userRepository.create(user);
+    const newUser: User = this.userRepository.create(user);
     return await this.userRepository.save(newUser);
   }
 
   async updateUser(user: UpdateUserDto): Promise<User> {
-    const updatedUser = await this.userRepository.preload({ ...user });
+    const updatedUser: User = await this.userRepository.preload({ ...user });
     if (!updatedUser) {
       throw new NotFoundException(`User with ID "${user.name}" not found`);
     }
@@ -41,7 +41,7 @@ export class UsersService {
     return await this.userRepository.delete(id);
   }
 
-  async findOne(username: string): Promise<User | undefined> {
-    return await this.userRepository.find(user => user.username === username);
+  async findOne(username: string): Promise<User> {
+    return this.userRepository.findOne({ username });
   }
 }

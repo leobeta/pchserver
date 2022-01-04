@@ -1,9 +1,11 @@
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './modules/auth/auth.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './modules/users/users.module';
-import { AuthModule } from './modules/auth/auth.module';
+import { CaseHistoryModule } from './modules/case-history/case-history.module';
+import { ComplaintsModule } from './modules/complaints/complaints.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { AuthModule } from './modules/auth/auth.module';
       autoLoadEntities: true,
     }),
     AuthModule,
+    CaseHistoryModule,
+    ComplaintsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

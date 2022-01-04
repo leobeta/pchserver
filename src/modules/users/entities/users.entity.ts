@@ -3,9 +3,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import { CaseHistory } from '../../case-history/entities';
 
 export enum Role {
   ADMIN = 'ADMIN',
@@ -24,8 +27,8 @@ export class User extends BaseEntity {
   password: string;
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role;
-  @Column({ nullable: true })
-  token: string;
+  @OneToMany(() => CaseHistory, (caseHistory) => caseHistory.user)
+  caseHistory: CaseHistory[];
   @CreateDateColumn()
   createdAt: Date;
   @UpdateDateColumn()
