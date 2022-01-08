@@ -1,3 +1,4 @@
+import { CreateCaseHistoryDto, UpdateCaseHistoryDto } from './dto';
 import { PaginationCaseHistoryDto } from './dto/pagination-case-history.dto';
 import {
   Controller,
@@ -20,7 +21,7 @@ export class CaseHistoryController {
   @UseGuards(JwtAuthGuard)
   @Get()
   async getAllCaseHistory(
-    @Query() pagination: PaginationCaseHistoryDto,
+    @Query() pagination?: PaginationCaseHistoryDto,
   ): Promise<CaseHistory[]> {
     return this.caseHistoryService.getAllCaseHistory(pagination);
   }
@@ -37,13 +38,17 @@ export class CaseHistoryController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  async createCaseHistory(caseHistory: CaseHistory): Promise<CaseHistory> {
+  async createCaseHistory(
+    caseHistory: CreateCaseHistoryDto,
+  ): Promise<CaseHistory> {
     return this.caseHistoryService.createCaseHistory(caseHistory);
   }
 
   @UseGuards(JwtAuthGuard)
   @Patch()
-  async updateCaseHistory(caseHistory: CaseHistory): Promise<CaseHistory> {
+  async updateCaseHistory(
+    caseHistory: UpdateCaseHistoryDto,
+  ): Promise<CaseHistory> {
     return this.caseHistoryService.updateCaseHistory(caseHistory);
   }
 

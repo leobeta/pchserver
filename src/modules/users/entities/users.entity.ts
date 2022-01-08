@@ -9,11 +9,7 @@ import {
 } from 'typeorm';
 
 import { CaseHistory } from '../../case-history/entities';
-
-export enum Role {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
-}
+import { Role } from 'src/common/enum';
 
 @Entity({ name: 'users' })
 export class User extends BaseEntity {

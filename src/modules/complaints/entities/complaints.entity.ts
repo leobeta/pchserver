@@ -8,23 +8,15 @@ import {
 } from 'typeorm';
 
 import { CaseHistory } from '../../case-history/entities/case-history.entity';
-
-export enum Type {
-  COGNITIVE_ASPECT = 'ASPECTO_COGNITIVO',
-  AFFECTIVE_ASPECT = 'ASPECTO_AFECTIVO',
-  BEHAVORIAL_ASPECT = 'ASPECTO_CONDUCTUAL',
-  PHYSIOLOGICAL_ASPECT = 'ASPECTO_FISIOLOGICO',
-  RELATIONAL_ASPECT = 'ASPECTO_RELACIONAL',
-  CONTEXTUAL_ASPECT = 'ASPECTO_CONTEXTUAL',
-}
+import { ComplaintsType } from 'src/common/enum';
 
 @Entity({ name: 'complaints' })
 export class Complaints extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'enum', enum: Type })
-  type: Type;
+  @Column({ type: 'enum', enum: ComplaintsType })
+  type: ComplaintsType;
 
   @Column({ type: 'text' })
   description: string;

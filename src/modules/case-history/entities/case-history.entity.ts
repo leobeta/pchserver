@@ -11,12 +11,8 @@ import {
 } from 'typeorm';
 
 import { Complaints } from '../../complaints/entities/complaints.entity';
+import { Genre } from 'src/common/enum';
 import { User } from 'src/modules/users/entities';
-
-export enum Genre {
-  MALE = 'MALE',
-  FEMALE = 'FEMALE',
-}
 
 @Entity({ name: 'case_history' })
 export class CaseHistory extends BaseEntity {
