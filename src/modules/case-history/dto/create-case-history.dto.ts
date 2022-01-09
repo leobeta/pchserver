@@ -1,4 +1,4 @@
-import { IsDate, IsObject, IsString } from 'class-validator';
+import { IsDate, IsObject, IsOptional, IsString } from 'class-validator';
 
 import { Complaints } from '../../complaints/entities/complaints.entity';
 import { Genre } from 'src/common/enum';
@@ -9,20 +9,27 @@ export class CreateCaseHistoryDto {
   identification: string;
   @IsDate()
   dob: Date;
+  @IsString()
   genre: Genre;
   @IsString()
   initialContact: string;
   @IsString()
   reason: string;
   @IsString()
-  scolarshipLevel?: string;
+  @IsOptional()
+  scolarshipLevel: string;
   @IsString()
-  occupation?: string;
+  @IsOptional()
+  occupation: string;
   @IsString()
-  origin?: string;
+  @IsOptional()
+  origin: string;
   @IsString()
-  religion?: string;
-  complaints?: Complaints[];
+  @IsOptional()
+  religion: string;
+  @IsObject()
+  @IsOptional()
+  complaints: Complaints[];
   @IsObject()
   user: Partial<User>;
 }

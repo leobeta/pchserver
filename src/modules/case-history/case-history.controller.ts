@@ -1,6 +1,7 @@
 import { CreateCaseHistoryDto, UpdateCaseHistoryDto } from './dto';
 import { PaginationCaseHistoryDto } from './dto/pagination-case-history.dto';
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -39,7 +40,7 @@ export class CaseHistoryController {
   @UseGuards(JwtAuthGuard)
   @Post()
   async createCaseHistory(
-    caseHistory: CreateCaseHistoryDto,
+    @Body() caseHistory: CreateCaseHistoryDto,
   ): Promise<CaseHistory> {
     return this.caseHistoryService.createCaseHistory(caseHistory);
   }
@@ -47,7 +48,7 @@ export class CaseHistoryController {
   @UseGuards(JwtAuthGuard)
   @Patch()
   async updateCaseHistory(
-    caseHistory: UpdateCaseHistoryDto,
+    @Body() caseHistory: UpdateCaseHistoryDto,
   ): Promise<CaseHistory> {
     return this.caseHistoryService.updateCaseHistory(caseHistory);
   }
