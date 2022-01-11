@@ -1,6 +1,7 @@
 import { ComplaintsService } from './complaints.service';
 import { PaginationComplaintsDto } from './dto/pagination-complaints.dto';
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -37,13 +38,15 @@ export class ComplaintsController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  async createComplaints(complaint: Complaints): Promise<Complaints> {
-    return this.complaintsService.createComplaints(complaint);
+  async createComplaints(@Body() complaint: Complaints): Promise<Complaints> {
+    console.log('Complaints: ', complaint);
+    return null;
+    // return this.complaintsService.createComplaints(complaint);
   }
 
   @UseGuards(JwtAuthGuard)
   @Patch()
-  async updateComplaints(complaint: Complaints): Promise<Complaints> {
+  async updateComplaints(@Body() complaint: Complaints): Promise<Complaints> {
     return this.complaintsService.updateComplaints(complaint);
   }
 

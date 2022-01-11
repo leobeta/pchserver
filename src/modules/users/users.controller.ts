@@ -1,17 +1,17 @@
-import { PaginationUserDto } from './dto/pagination-user.dto';
+import { CreateUserDto, UpdateUserDto, PaginationUserDto } from './dto';
 import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 import {
   Body,
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Patch,
   Post,
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { CreateUserDto, UpdateUserDto } from './dto';
 import { User } from './entities';
 import { UsersService } from './users.service';
 
@@ -21,31 +21,35 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  getAllUsers(@Query() pagination: PaginationUserDto): Promise<User[]> {
+  async getAllUsers(@Query() pagination?: PaginationUserDto): Promise<User[]> {
     return this.usersService.getAllUsers(pagination);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  getUser(@Param('id') id: number): Promise<User> {
-    return this.usersService.getUser(id);
+  async getUser(@Param('id') id: number): Promise<User> {
+    const user = await this.usersService.getUser(id);
+    if (!user) {
+      throw new NotFoundException(`User with ID "${id}" not found`);
+    }
+    return user;
   }
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  createUser(@Body() user: CreateUserDto): Promise<User> {
+  async createUser(@Body() user: CreateUserDto): Promise<User> {
     return this.usersService.createUser(user);
   }
 
   @UseGuards(JwtAuthGuard)
   @Patch()
-  updateUser(@Body() user: UpdateUserDto): Promise<User> {
+  async updateUser(@Body() user: UpdateUserDto): Promise<User> {
     return this.usersService.updateUser(user);
   }
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  removeUser(@Param('id') id: number) {
+  async removeUser(@Param('id') id: number) {
     return this.usersService.removeUser(id);
   }
 }

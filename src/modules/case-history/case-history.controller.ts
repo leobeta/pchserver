@@ -1,5 +1,9 @@
-import { CreateCaseHistoryDto, UpdateCaseHistoryDto } from './dto';
-import { PaginationCaseHistoryDto } from './dto/pagination-case-history.dto';
+import {
+  CreateCaseHistoryDto,
+  UpdateCaseHistoryDto,
+  PaginationCaseHistoryDto,
+} from './dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import {
   Body,
   Controller,
@@ -13,7 +17,6 @@ import {
 } from '@nestjs/common';
 import { CaseHistoryService } from './case-history.service';
 import { CaseHistory } from './entities';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('case-history')
 export class CaseHistoryController {

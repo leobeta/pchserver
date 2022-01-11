@@ -1,11 +1,14 @@
-import { UpdateCaseHistoryDto } from './dto/update-case-history.dto';
-import { CreateCaseHistoryDto } from './dto/create-case-history.dto';
-import { PaginationCaseHistoryDto } from './dto/pagination-case-history.dto';
+import {
+  UpdateCaseHistoryDto,
+  CreateCaseHistoryDto,
+  PaginationCaseHistoryDto,
+} from './dto';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CaseHistory } from './entities';
 import { User } from '../users/entities';
+import { Complaints } from '../complaints/entities';
 
 @Injectable()
 export class CaseHistoryService {
@@ -14,6 +17,8 @@ export class CaseHistoryService {
     private readonly caseHistoryRepository: Repository<CaseHistory>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(Complaints)
+    private readonly complaintsRepository: Repository<Complaints>,
   ) { }
 
   async getAllCaseHistory({
