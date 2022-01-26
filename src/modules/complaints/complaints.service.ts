@@ -9,12 +9,9 @@ export class ComplaintsService {
   constructor(
     @InjectRepository(Complaints)
     private readonly complaintsService: Repository<Complaints>,
-  ) { }
+  ) {}
 
-  async findAllComplaints({
-    limit,
-    offset,
-  }: PaginationComplaintsDto): Promise<Complaints[]> {
+  async findAllComplaints({ limit, offset }: PaginationComplaintsDto): Promise<Complaints[]> {
     return this.complaintsService.find({
       relations: ['case_history'],
       skip: offset,
@@ -38,13 +35,9 @@ export class ComplaintsService {
   }
 
   async updateComplaints(complaints: Complaints): Promise<Complaints> {
-    const updatedComplaints: Complaints = await this.complaintsService.preload(
-      complaints,
-    );
+    const updatedComplaints: Complaints = await this.complaintsService.preload(complaints);
     if (!updatedComplaints) {
-      throw new NotFoundException(
-        `Complaints with ID "${complaints.id}" not found`,
-      );
+      throw new NotFoundException(`Complaints with ID "${complaints.id}" not found`);
     }
     return this.complaintsService.save(updatedComplaints);
   }

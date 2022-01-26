@@ -11,4 +11,4 @@ import { User } from '../users/entities';
   providers: [CaseHistoryService],
   controllers: [CaseHistoryController],
 })
-export class CaseHistoryModule { }
+export class CaseHistoryModule {}

@@ -10,4 +10,4 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [ComplaintsController],
   exports: [ComplaintsService],
 })
-export class ComplaintsModule { }
+export class ComplaintsModule {}

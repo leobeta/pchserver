@@ -1,32 +1,16 @@
-import {
-  CreateCaseHistoryDto,
-  UpdateCaseHistoryDto,
-  PaginationCaseHistoryDto,
-} from './dto';
+import { CreateCaseHistoryDto, UpdateCaseHistoryDto, PaginationCaseHistoryDto } from './dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  NotFoundException,
-  Patch,
-  Post,
-  Query,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { CaseHistoryService } from './case-history.service';
 import { CaseHistory } from './entities';
 
 @Controller('case-history')
 export class CaseHistoryController {
-  constructor(private readonly caseHistoryService: CaseHistoryService) { }
+  constructor(private readonly caseHistoryService: CaseHistoryService) {}
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  async getAllCaseHistory(
-    @Query() pagination?: PaginationCaseHistoryDto,
-  ): Promise<CaseHistory[]> {
+  async getAllCaseHistory(@Query() pagination?: PaginationCaseHistoryDto): Promise<CaseHistory[]> {
     return this.caseHistoryService.getAllCaseHistory(pagination);
   }
 
@@ -42,17 +26,13 @@ export class CaseHistoryController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  async createCaseHistory(
-    @Body() caseHistory: CreateCaseHistoryDto,
-  ): Promise<CaseHistory> {
+  async createCaseHistory(@Body() caseHistory: CreateCaseHistoryDto): Promise<CaseHistory> {
     return this.caseHistoryService.createCaseHistory(caseHistory);
   }
 
   @UseGuards(JwtAuthGuard)
   @Patch()
-  async updateCaseHistory(
-    @Body() caseHistory: UpdateCaseHistoryDto,
-  ): Promise<CaseHistory> {
+  async updateCaseHistory(@Body() caseHistory: UpdateCaseHistoryDto): Promise<CaseHistory> {
     return this.caseHistoryService.updateCaseHistory(caseHistory);
   }
 

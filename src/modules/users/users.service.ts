@@ -7,9 +7,7 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>,
-  ) { }
+  constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
 
   async getAllUsers({ limit, offset }: PaginationUserDto): Promise<User[]> {
     return this.userRepository.find({ skip: offset, take: limit });

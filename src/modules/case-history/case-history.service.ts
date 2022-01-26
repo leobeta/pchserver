@@ -1,8 +1,4 @@
-import {
-  UpdateCaseHistoryDto,
-  CreateCaseHistoryDto,
-  PaginationCaseHistoryDto,
-} from './dto';
+import { UpdateCaseHistoryDto, CreateCaseHistoryDto, PaginationCaseHistoryDto } from './dto';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -19,12 +15,9 @@ export class CaseHistoryService {
     private readonly userRepository: Repository<User>,
     @InjectRepository(Complaints)
     private readonly complaintsRepository: Repository<Complaints>,
-  ) { }
+  ) {}
 
-  async getAllCaseHistory({
-    limit,
-    offset,
-  }: PaginationCaseHistoryDto): Promise<CaseHistory[]> {
+  async getAllCaseHistory({ limit, offset }: PaginationCaseHistoryDto): Promise<CaseHistory[]> {
     return this.caseHistoryRepository.find({
       relations: ['complaints'],
       skip: offset,
@@ -42,23 +35,15 @@ export class CaseHistoryService {
     return caseHistory;
   }
 
-  async createCaseHistory(
-    caseHistory: CreateCaseHistoryDto,
-  ): Promise<CaseHistory> {
-    const newCaseHistory: CaseHistory =
-      this.caseHistoryRepository.create(caseHistory);
+  async createCaseHistory(caseHistory: CreateCaseHistoryDto): Promise<CaseHistory> {
+    const newCaseHistory: CaseHistory = this.caseHistoryRepository.create(caseHistory);
     return await this.caseHistoryRepository.save(newCaseHistory);
   }
 
-  async updateCaseHistory(
-    caseHistory: UpdateCaseHistoryDto,
-  ): Promise<CaseHistory> {
-    const updatedCaseHistory: CaseHistory =
-      await this.caseHistoryRepository.preload(caseHistory);
+  async updateCaseHistory(caseHistory: UpdateCaseHistoryDto): Promise<CaseHistory> {
+    const updatedCaseHistory: CaseHistory = await this.caseHistoryRepository.preload(caseHistory);
     if (!updatedCaseHistory) {
-      throw new NotFoundException(
-        `CaseHistory with ID "${caseHistory.id}" not found`,
-      );
+      throw new NotFoundException(`CaseHistory with ID "${caseHistory.id}" not found`);
     }
     return this.caseHistoryRepository.save(updatedCaseHistory);
   }

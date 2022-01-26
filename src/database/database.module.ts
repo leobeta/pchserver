@@ -5,4 +5,4 @@ import { Module } from '@nestjs/common';
   imports: [DatabaseProvider],
   exports: [DatabaseProvider],
 })
-export class DatabaseModule { }
+export class DatabaseModule {}

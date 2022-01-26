@@ -7,7 +7,6 @@ import { CaseHistoryModule } from './modules/case-history/case-history.module';
 import { ComplaintsModule } from './modules/complaints/complaints.module';
 import { DatabaseModule } from './database/database.module';
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './modules/users/users.module';
 
 @Module({
