@@ -9,21 +9,23 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { CaseHistory } from '../../case-history/entities/case-history.entity';
-import { ComplaintsType } from 'src/common/enum';
+import { CaseHistory } from 'src/modules/case-history/entities';
 
-@Entity({ name: 'complaints' })
-export class Complaints extends BaseEntity {
+@Entity('functional_analysis')
+export class FunctionalAnalysis extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'enum', enum: ComplaintsType })
-  type: ComplaintsType;
+  @Column({ type: 'text' })
+  situation: string;
 
   @Column({ type: 'text' })
-  description: string;
+  answer: string;
 
-  @ManyToOne(() => CaseHistory, (caseHistory) => caseHistory.complaints, {
+  @Column({ type: 'text' })
+  consequence: string;
+
+  @ManyToOne(() => CaseHistory, (caseHistory) => caseHistory.functionalAnalysis, {
     cascade: true,
   })
   @JoinColumn({ name: 'case_history_id' })

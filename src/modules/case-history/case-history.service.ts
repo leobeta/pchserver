@@ -1,3 +1,4 @@
+import { Problems } from 'src/modules/problems/entities/problems.entity';
 import { UpdateCaseHistoryDto, CreateCaseHistoryDto, PaginationCaseHistoryDto } from './dto';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,7 +16,9 @@ export class CaseHistoryService {
     private readonly userRepository: Repository<User>,
     @InjectRepository(Complaints)
     private readonly complaintsRepository: Repository<Complaints>,
-  ) {}
+    @InjectRepository(Problems)
+    private readonly problemsRepository: Repository<Problems>,
+  ) { }
 
   async getAllCaseHistory({ limit, offset }: PaginationCaseHistoryDto): Promise<CaseHistory[]> {
     return this.caseHistoryRepository.find({

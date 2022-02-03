@@ -6,7 +6,7 @@ import { Complaints } from './entities';
 
 @Controller('complaints')
 export class ComplaintsController {
-  constructor(private readonly complaintsService: ComplaintsService) {}
+  constructor(private readonly complaintsService: ComplaintsService) { }
 
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -28,8 +28,7 @@ export class ComplaintsController {
   @Post()
   async createComplaints(@Body() complaint: Complaints): Promise<Complaints> {
     console.log('Complaints: ', complaint);
-    return null;
-    // return this.complaintsService.createComplaints(complaint);
+    return this.complaintsService.createComplaints(complaint);
   }
 
   @UseGuards(JwtAuthGuard)

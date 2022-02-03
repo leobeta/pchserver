@@ -11,7 +11,9 @@ import {
 } from 'typeorm';
 
 import { Complaints } from '../../complaints/entities/complaints.entity';
+import { FunctionalAnalysis } from './../../funtional-analysis/entities/functional-analysis.entity';
 import { Genre } from 'src/common/enum';
+import { Problems } from 'src/modules/problems/entities/problems.entity';
 import { User } from 'src/modules/users/entities';
 
 @Entity({ name: 'case_history' })
@@ -48,6 +50,12 @@ export class CaseHistory extends BaseEntity {
 
   @OneToMany(() => Complaints, (complaints) => complaints.caseHistory)
   complaints: Complaints[];
+
+  @OneToMany(() => Problems, (problems) => problems.caseHistory)
+  problems: Problems[];
+
+  @OneToMany(() => FunctionalAnalysis, (functionalAnalysis) => functionalAnalysis.caseHistory)
+  functionalAnalysis: FunctionalAnalysis[];
 
   @ManyToOne(() => User, (user) => user.caseHistory, { cascade: true })
   @JoinColumn({ name: 'user_id' })
