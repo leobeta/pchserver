@@ -16,7 +16,7 @@ export class MolarRelationshipProblemService {
     private readonly molarRelationshipProblemRepository: Repository<MolarRelationshipProblems>,
     @InjectRepository(Problems)
     private readonly problemsRepository: Repository<Problems>,
-  ) { }
+  ) {}
 
   async getAllMolarRelationshipProblems({
     limit,

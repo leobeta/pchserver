@@ -10,12 +10,15 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { Complaints } from '../../complaints/entities/complaints.entity';
-import { FunctionalAnalysis } from '../../funtional-analysis/entities/functional-analysis.entity';
+import { ClinicalEvaluationProcess } from './../../clinical-evaluation-process/entities';
+import { Complaints } from '../../complaints/entities';
+import { DevelopmentFactors } from './../../development-factors/entities/deveopment-factors.entity';
+import { FunctionalAnalysis } from '../../funtional-analysis/entities';
 import { Genre } from '../../../common/enum';
-import { HistoricalAnalysis } from './../../historical-analysis/entities/historical-analysis.entity';
+import { HistoricalAnalysis } from './../../historical-analysis/entities';
 import { MolarRelationshipProblems } from '../../molar-relationship-problems/entities';
-import { Problems } from '../../problems/entities/problems.entity';
+import { MultiaxialEvaluationPreferentialDiagnosis } from './../../multiaxial-evaluation-preferential-diagnosis/entities/multiaxial-evaluation-preferential-diagnosis.entity';
+import { Problems } from '../../problems/entities';
 import { User } from '../../users/entities';
 
 @Entity({ name: 'case_history' })
@@ -64,6 +67,18 @@ export class CaseHistory extends BaseEntity {
 
   @OneToMany(() => HistoricalAnalysis, (historicalAnalysis) => historicalAnalysis.caseHistory)
   historicalAnalysis: HistoricalAnalysis;
+
+  @OneToMany(() => ClinicalEvaluationProcess, (clinicalEvaluationProcess) => clinicalEvaluationProcess.caseHistory)
+  clinicalEvaluationProcess: ClinicalEvaluationProcess;
+
+  @OneToMany(() => DevelopmentFactors, (developmentFactors) => developmentFactors.caseHistory)
+  developmentFactors: DevelopmentFactors[];
+
+  @ManyToOne(
+    () => MultiaxialEvaluationPreferentialDiagnosis,
+    (multiaxialEvaluationPreferentialDiagnosis) => multiaxialEvaluationPreferentialDiagnosis.caseHistory,
+  )
+  multiaxialEvaluationPreferentialDiagnosis: MultiaxialEvaluationPreferentialDiagnosis;
 
   @ManyToOne(() => User, (user) => user.caseHistory, { cascade: true })
   @JoinColumn({ name: 'user_id' })

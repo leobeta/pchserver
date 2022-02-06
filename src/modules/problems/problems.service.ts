@@ -9,7 +9,7 @@ export class ProblemsService {
   constructor(
     @InjectRepository(Problems)
     private readonly problemsService: Repository<Problems>,
-  ) { }
+  ) {}
 
   async findAllProblems({ limit, offset }: PaginationProblemsDto): Promise<Problems[]> {
     return this.problemsService.find({

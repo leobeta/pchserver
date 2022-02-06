@@ -10,7 +10,7 @@ import {
 
 @Controller('molar-relationship-problem')
 export class MolarRelationshipProblemController {
-  constructor(private readonly molarRelationshipProblemService: MolarRelationshipProblemService) { }
+  constructor(private readonly molarRelationshipProblemService: MolarRelationshipProblemService) {}
 
   @UseGuards(JwtAuthGuard)
   @Get()
