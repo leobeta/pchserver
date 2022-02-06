@@ -11,10 +11,12 @@ import {
 } from 'typeorm';
 
 import { Complaints } from '../../complaints/entities/complaints.entity';
-import { FunctionalAnalysis } from './../../funtional-analysis/entities/functional-analysis.entity';
-import { Genre } from 'src/common/enum';
-import { Problems } from 'src/modules/problems/entities/problems.entity';
-import { User } from 'src/modules/users/entities';
+import { FunctionalAnalysis } from '../../funtional-analysis/entities/functional-analysis.entity';
+import { Genre } from '../../../common/enum';
+import { HistoricalAnalysis } from './../../historical-analysis/entities/historical-analysis.entity';
+import { MolarRelationshipProblems } from '../../molar-relationship-problems/entities';
+import { Problems } from '../../problems/entities/problems.entity';
+import { User } from '../../users/entities';
 
 @Entity({ name: 'case_history' })
 export class CaseHistory extends BaseEntity {
@@ -56,6 +58,12 @@ export class CaseHistory extends BaseEntity {
 
   @OneToMany(() => FunctionalAnalysis, (functionalAnalysis) => functionalAnalysis.caseHistory)
   functionalAnalysis: FunctionalAnalysis[];
+
+  @OneToMany(() => MolarRelationshipProblems, (molarRelationshipProblems) => molarRelationshipProblems.caseHistory)
+  molarRelationshipProblems: MolarRelationshipProblems[];
+
+  @OneToMany(() => HistoricalAnalysis, (historicalAnalysis) => historicalAnalysis.caseHistory)
+  historicalAnalysis: HistoricalAnalysis;
 
   @ManyToOne(() => User, (user) => user.caseHistory, { cascade: true })
   @JoinColumn({ name: 'user_id' })

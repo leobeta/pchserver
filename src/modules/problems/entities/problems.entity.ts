@@ -9,7 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { CaseHistory } from './../../case-history/entities/case-history.entity';
+import { CaseHistory } from '../../case-history/entities/case-history.entity';
 
 @Entity({ name: 'problems' })
 export class Problems extends BaseEntity {

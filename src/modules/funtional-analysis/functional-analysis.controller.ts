@@ -1,12 +1,12 @@
 import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 import { Controller, Get, NotFoundException, Post, Query, UseGuards, Patch, Delete } from '@nestjs/common';
 import { FunctionalAnalysisService } from './functional-analysis.service';
-import { PaginationFunctionalAnalysisDto } from './dto/pagination-functional-analysis.dto';
+import { PaginationFunctionalAnalysisDto, CreateFunctionalAnalysisDto, UpdateFunctionalAnalysisDto } from './dto';
 import { FunctionalAnalysis } from './entities';
 
 @Controller('functional-analysis')
 export class FunctionalAnalysisController {
-  constructor(private readonly functionalAnalysisService: FunctionalAnalysisService) { }
+  constructor(private readonly functionalAnalysisService: FunctionalAnalysisService) {}
 
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -26,13 +26,13 @@ export class FunctionalAnalysisController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  async createFunctionalAnalysis(functionalAnalysis: FunctionalAnalysis): Promise<FunctionalAnalysis> {
+  async createFunctionalAnalysis(functionalAnalysis: CreateFunctionalAnalysisDto): Promise<FunctionalAnalysis> {
     return this.functionalAnalysisService.createFunctionalAnalysis(functionalAnalysis);
   }
 
   @UseGuards(JwtAuthGuard)
   @Patch()
-  async updateFunctionalAnalysis(functionalAnalysis: FunctionalAnalysis): Promise<FunctionalAnalysis> {
+  async updateFunctionalAnalysis(functionalAnalysis: UpdateFunctionalAnalysisDto): Promise<FunctionalAnalysis> {
     return this.functionalAnalysisService.updateFunctionalAnalysis(functionalAnalysis);
   }
 

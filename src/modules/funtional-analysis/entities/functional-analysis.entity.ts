@@ -9,7 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { CaseHistory } from 'src/modules/case-history/entities';
+import { CaseHistory } from '../../case-history/entities';
 
 @Entity('functional_analysis')
 export class FunctionalAnalysis extends BaseEntity {

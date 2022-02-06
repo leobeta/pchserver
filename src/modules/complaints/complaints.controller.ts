@@ -3,10 +3,11 @@ import { PaginationComplaintsDto } from './dto/pagination-complaints.dto';
 import { Body, Controller, Delete, Get, NotFoundException, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Complaints } from './entities';
+import { CreateComplaintsDto, UpdateComplaintsDto } from './dto';
 
 @Controller('complaints')
 export class ComplaintsController {
-  constructor(private readonly complaintsService: ComplaintsService) { }
+  constructor(private readonly complaintsService: ComplaintsService) {}
 
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -26,14 +27,13 @@ export class ComplaintsController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  async createComplaints(@Body() complaint: Complaints): Promise<Complaints> {
-    console.log('Complaints: ', complaint);
+  async createComplaints(@Body() complaint: CreateComplaintsDto): Promise<Complaints> {
     return this.complaintsService.createComplaints(complaint);
   }
 
   @UseGuards(JwtAuthGuard)
   @Patch()
-  async updateComplaints(@Body() complaint: Complaints): Promise<Complaints> {
+  async updateComplaints(@Body() complaint: UpdateComplaintsDto): Promise<Complaints> {
     return this.complaintsService.updateComplaints(complaint);
   }
 

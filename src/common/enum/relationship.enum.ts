@@ -1,0 +1,7 @@
+export enum RelationshipTypes {
+  HIERARCHICAL = 'JERARQUICA',
+  ONE_WAY = 'UNIDIRECCIONAL',
+  TWO_WAY = 'BIDIRECCIONAL',
+  NESTED = 'ANIDADA',
+  MIXED = 'MIXTA',
+}

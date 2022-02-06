@@ -7,6 +7,7 @@ import { CaseHistoryModule } from './modules/case-history/case-history.module';
 import { ComplaintsModule } from './modules/complaints/complaints.module';
 import { DatabaseModule } from './database/database.module';
 import { Module } from '@nestjs/common';
+import { MolarRelationshipProblemModule } from './modules/molar-relationship-problems/molar-relationship-problem.module';
 import { ProblemsModule } from './modules/problems/problems.module';
 import { UsersModule } from './modules/users/users.module';
 
@@ -19,6 +20,7 @@ import { UsersModule } from './modules/users/users.module';
     CaseHistoryModule,
     ComplaintsModule,
     ProblemsModule,
+    MolarRelationshipProblemModule,
   ],
   controllers: [AppController],
   providers: [AppService],

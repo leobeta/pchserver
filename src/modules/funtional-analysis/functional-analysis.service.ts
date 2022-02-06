@@ -1,15 +1,15 @@
-import { PaginationFunctionalAnalysisDto } from './dto/pagination-functional-analysis.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { FunctionalAnalysis } from './entities';
 import { Repository } from 'typeorm';
+import { PaginationFunctionalAnalysisDto, CreateFunctionalAnalysisDto, UpdateFunctionalAnalysisDto } from './dto';
 
 @Injectable()
 export class FunctionalAnalysisService {
   constructor(
     @InjectRepository(FunctionalAnalysis)
     private readonly functionalAnalysisRepository: Repository<FunctionalAnalysis>,
-  ) { }
+  ) {}
 
   async getAllFunctionalAnalysis({ limit, offset }: PaginationFunctionalAnalysisDto): Promise<FunctionalAnalysis[]> {
     return this.functionalAnalysisRepository.find({
@@ -27,13 +27,15 @@ export class FunctionalAnalysisService {
     return functionalAnalysis;
   }
 
-  async createFunctionalAnalysis(functionalAnalysis: FunctionalAnalysis): Promise<FunctionalAnalysis> {
+  async createFunctionalAnalysis(functionalAnalysis: CreateFunctionalAnalysisDto): Promise<FunctionalAnalysis> {
     const newFunctionalAnalysis: FunctionalAnalysis = this.functionalAnalysisRepository.create(functionalAnalysis);
     return await this.functionalAnalysisRepository.save(newFunctionalAnalysis);
   }
 
-  async updateFunctionalAnalysis(functionalAnalysis: FunctionalAnalysis): Promise<FunctionalAnalysis> {
-    const updatedFunctionalAnalysis: FunctionalAnalysis = await this.functionalAnalysisRepository.preload(functionalAnalysis);
+  async updateFunctionalAnalysis(functionalAnalysis: UpdateFunctionalAnalysisDto): Promise<FunctionalAnalysis> {
+    const updatedFunctionalAnalysis: FunctionalAnalysis = await this.functionalAnalysisRepository.preload(
+      functionalAnalysis,
+    );
     if (!updatedFunctionalAnalysis) {
       throw new NotFoundException(`FunctionalAnalysis with ID "${functionalAnalysis.id}" not found`);
     }

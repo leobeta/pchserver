@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 
 import { CaseHistory } from '../../case-history/entities/case-history.entity';
-import { ComplaintsType } from 'src/common/enum';
+import { ComplaintsType } from '../../../common/enum';
 
 @Entity({ name: 'complaints' })
 export class Complaints extends BaseEntity {

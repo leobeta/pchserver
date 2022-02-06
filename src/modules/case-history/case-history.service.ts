@@ -18,7 +18,7 @@ export class CaseHistoryService {
     private readonly complaintsRepository: Repository<Complaints>,
     @InjectRepository(Problems)
     private readonly problemsRepository: Repository<Problems>,
-  ) { }
+  ) {}
 
   async getAllCaseHistory({ limit, offset }: PaginationCaseHistoryDto): Promise<CaseHistory[]> {
     return this.caseHistoryRepository.find({

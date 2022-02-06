@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { PaginationProblemsDto } from './dto';
+import { CreateProblemsDto, PaginationProblemsDto, UpdateProblemsDto } from './dto';
 import { Problems } from './entities';
 
 @Injectable()
@@ -29,12 +29,12 @@ export class ProblemsService {
     return problem;
   }
 
-  async createProblems(problems: Problems): Promise<Problems> {
+  async createProblems(problems: CreateProblemsDto): Promise<Problems> {
     const newProblems: Problems = this.problemsService.create(problems);
     return await this.problemsService.save(newProblems);
   }
 
-  async updateProblems(problems: Problems): Promise<Problems> {
+  async updateProblems(problems: UpdateProblemsDto): Promise<Problems> {
     const updatedProblems: Problems = await this.problemsService.preload(problems);
     if (!updatedProblems) {
       throw new NotFoundException(`Problems with ID "${problems.id}" not found`);

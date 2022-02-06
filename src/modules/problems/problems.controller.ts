@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, NotFoundException, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { PaginationProblemsDto } from './dto';
+import { CreateProblemsDto, PaginationProblemsDto, UpdateProblemsDto } from './dto';
 import { Problems } from './entities';
 import { ProblemsService } from './problems.service';
 
@@ -26,13 +26,13 @@ export class ProblemsController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  async createProblems(@Body() problems: Problems): Promise<Problems> {
+  async createProblems(@Body() problems: CreateProblemsDto): Promise<Problems> {
     return this.problemsService.createProblems(problems);
   }
 
   @UseGuards(JwtAuthGuard)
   @Patch()
-  async updateProblems(@Body() problems: Problems): Promise<Problems> {
+  async updateProblems(@Body() problems: UpdateProblemsDto): Promise<Problems> {
     return this.problemsService.updateProblems(problems);
   }
 
@@ -41,5 +41,4 @@ export class ProblemsController {
   async removeProblems(@Query('id') id: number): Promise<void> {
     await this.problemsService.removeProblems(id);
   }
-
 }

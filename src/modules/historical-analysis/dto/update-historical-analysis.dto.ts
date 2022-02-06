@@ -2,21 +2,33 @@ import { IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
 
 import { CaseHistory } from '../../case-history/entities';
 
-export class UpdateFunctionalAnalysisDto {
+export class UpdateHistoricalAnalysisDto {
   @IsNumber()
   id: number;
 
   @IsString()
   @IsOptional()
-  situation: string;
+  personalHistory: string;
 
   @IsString()
   @IsOptional()
-  answer: string;
+  familyHistory: string;
 
   @IsString()
   @IsOptional()
-  consequence: string;
+  academicHistory: string;
+
+  @IsString()
+  @IsOptional()
+  socioAfectiveHistory: string;
+
+  @IsString()
+  @IsOptional()
+  sexualHistory: string;
+
+  @IsString()
+  @IsOptional()
+  problemHistory: string;
 
   @IsObject()
   caseHistory: CaseHistory;

@@ -1,4 +1,4 @@
-import { FunctionalAnalysis } from './entities/functional-analysis.entity';
+import { FunctionalAnalysis } from './entities';
 import { FunctionalAnalysisController } from './functional-analysis.controller';
 import { FunctionalAnalysisService } from './functional-analysis.service';
 import { Module } from '@nestjs/common';
@@ -10,4 +10,4 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [FunctionalAnalysisController],
   exports: [FunctionalAnalysisService],
 })
-export class FunctionalAnalysisModule { }
+export class FunctionalAnalysisModule {}

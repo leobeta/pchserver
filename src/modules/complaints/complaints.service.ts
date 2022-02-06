@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { PaginationComplaintsDto } from './dto';
+import { CreateComplaintsDto, PaginationComplaintsDto, UpdateComplaintsDto } from './dto';
 import { Complaints } from './entities';
 
 @Injectable()
@@ -29,12 +29,12 @@ export class ComplaintsService {
     return complaint;
   }
 
-  async createComplaints(complaints: Complaints): Promise<Complaints> {
+  async createComplaints(complaints: CreateComplaintsDto): Promise<Complaints> {
     const newComplaints: Complaints = this.complaintsService.create(complaints);
     return await this.complaintsService.save(newComplaints);
   }
 
-  async updateComplaints(complaints: Complaints): Promise<Complaints> {
+  async updateComplaints(complaints: UpdateComplaintsDto): Promise<Complaints> {
     const updatedComplaints: Complaints = await this.complaintsService.preload(complaints);
     if (!updatedComplaints) {
       throw new NotFoundException(`Complaints with ID "${complaints.id}" not found`);
