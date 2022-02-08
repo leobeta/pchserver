@@ -3,7 +3,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -11,8 +10,8 @@ import {
 
 import { CaseHistory } from 'src/modules/case-history/entities';
 
-@Entity('multiaxial_evaluation_preferential_diagnosis')
-export class MultiaxialEvaluationPreferentialDiagnosis extends BaseEntity {
+@Entity('clinical_formulation')
+export class ClinicalFormulation extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -22,8 +21,7 @@ export class MultiaxialEvaluationPreferentialDiagnosis extends BaseEntity {
   @Column({ type: 'text' })
   description: string;
 
-  @ManyToOne(() => CaseHistory, (caseHistory) => caseHistory.multiaxialEvaluationPreferentialDiagnosis)
-  @JoinColumn({ name: 'case_history_id' })
+  @ManyToOne(() => CaseHistory, (caseHistory) => caseHistory.clinicalFormulation)
   caseHistory: CaseHistory;
 
   @CreateDateColumn()

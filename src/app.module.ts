@@ -13,6 +13,7 @@ import { ProblemsModule } from './modules/problems/problems.module';
 import { UsersModule } from './modules/users/users.module';
 import { DevelopmentFactorsModule } from './modules/development-factors/development-factors.module';
 import { MultiaxialEvaluationPreferentialDiagnosisModule } from './modules/multiaxial-evaluation-preferential-diagnosis/multiaxial-evaluation-preferential-diagnosis.module';
+import { ClinicalFormulationModule } from './modules/clinical-formulation/clinical-formulation.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { MultiaxialEvaluationPreferentialDiagnosisModule } from './modules/multi
     ClinicalEvaluationProcessModule,
     DevelopmentFactorsModule,
     MultiaxialEvaluationPreferentialDiagnosisModule,
+    ClinicalFormulationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

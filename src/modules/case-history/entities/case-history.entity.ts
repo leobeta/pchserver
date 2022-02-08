@@ -11,13 +11,14 @@ import {
 } from 'typeorm';
 
 import { ClinicalEvaluationProcess } from './../../clinical-evaluation-process/entities';
+import { ClinicalFormulation } from './../../clinical-formulation/entities';
 import { Complaints } from '../../complaints/entities';
 import { DevelopmentFactors } from './../../development-factors/entities/deveopment-factors.entity';
 import { FunctionalAnalysis } from '../../funtional-analysis/entities';
 import { Genre } from '../../../common/enum';
 import { HistoricalAnalysis } from './../../historical-analysis/entities';
 import { MolarRelationshipProblems } from '../../molar-relationship-problems/entities';
-import { MultiaxialEvaluationPreferentialDiagnosis } from './../../multiaxial-evaluation-preferential-diagnosis/entities/multiaxial-evaluation-preferential-diagnosis.entity';
+import { MultiaxialEvaluationPreferentialDiagnosis } from './../../multiaxial-evaluation-preferential-diagnosis/entities';
 import { Problems } from '../../problems/entities';
 import { User } from '../../users/entities';
 
@@ -74,11 +75,14 @@ export class CaseHistory extends BaseEntity {
   @OneToMany(() => DevelopmentFactors, (developmentFactors) => developmentFactors.caseHistory)
   developmentFactors: DevelopmentFactors[];
 
-  @ManyToOne(
+  @OneToMany(
     () => MultiaxialEvaluationPreferentialDiagnosis,
     (multiaxialEvaluationPreferentialDiagnosis) => multiaxialEvaluationPreferentialDiagnosis.caseHistory,
   )
-  multiaxialEvaluationPreferentialDiagnosis: MultiaxialEvaluationPreferentialDiagnosis;
+  multiaxialEvaluationPreferentialDiagnosis: MultiaxialEvaluationPreferentialDiagnosis[];
+
+  @OneToMany(() => ClinicalFormulation, (clinicalFormulation) => clinicalFormulation.caseHistory)
+  clinicalFormulation: ClinicalFormulation;
 
   @ManyToOne(() => User, (user) => user.caseHistory, { cascade: true })
   @JoinColumn({ name: 'user_id' })

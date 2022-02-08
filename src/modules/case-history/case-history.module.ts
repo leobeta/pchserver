@@ -2,6 +2,7 @@ import { CaseHistory } from './entities';
 import { CaseHistoryController } from './case-history.controller';
 import { CaseHistoryService } from './case-history.service';
 import { ClinicalEvaluationProcess } from './../clinical-evaluation-process/entities';
+import { ClinicalFormulation } from '../clinical-formulation/entities';
 import { Complaints } from '../complaints/entities';
 import { FunctionalAnalysis } from '../funtional-analysis/entities';
 import { HistoricalAnalysis } from '../historical-analysis/entities';
@@ -24,9 +25,10 @@ import { User } from '../users/entities';
       HistoricalAnalysis,
       ClinicalEvaluationProcess,
       MultiaxialEvaluationPreferentialDiagnosis,
+      ClinicalFormulation,
     ]),
   ],
   providers: [CaseHistoryService],
   controllers: [CaseHistoryController],
 })
-export class CaseHistoryModule {}
+export class CaseHistoryModule { }
